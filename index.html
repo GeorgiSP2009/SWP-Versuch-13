@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="style.css">
     <script>
         function updatePrice() {
-            const priceOutput = document.getElementById("priceOutPut");
-            const productSelect = document.getElementById("product");
-            priceOutput.textContent = productSelect.value + " €";
+            let priceOutput = document.getElementById("priceOutPut");
+            let productSelect = document.getElementById("product");
+
+            document.getElementById("priceOutPut").innerHTML = productSelect.value + "EUR"
         }
 
         function addToCart() {
