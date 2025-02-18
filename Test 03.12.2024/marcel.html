@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 3.12.24</title>
+</head>
+<body>
+    <h1>Auswahl zur Zeit der Mahlzeit</h1>
+    <form onsubmit="event.preventDefault(); validateForm();">
+        <label for="username">Benutzername:</label>
+        <input type="text" id="username" placeholder="Max Mustermann"><br><br>
+
+        <label for="email">E-Mail-Adresse:</label>
+        <input type="text" id="email" placeholder="beispiel@domain.com"><br><br>
+
+        <label for="dropdown">Auswahl:</label>
+        <select id="dropdown">
+            <option value="">Wählen Sie etwas aus</option>
+            <option value="Frühstück">Frühstück</option>
+            <option value="Mittagessen">Mittagessen</option>
+            <option value="Abendessen">Abendessen</option>
+            <option value="Snack">Snack</option>
+        </select><br><br>
+
+        <label>
+            <input type="checkbox" id="terms">
+            Ich akzeptiere die Nutzungsbedingungen.
+        </label><br><br>
+
+        <button type="submit">Bestätigen</button>
+    </form>
+    <script>
+        function validateForm() {
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const dropdown = document.getElementById('dropdown').value;
+            const checkbox = document.getElementById('terms').checked;
+
+            let errors = "";
+
+            if (username.length < 5) {
+                errors += ("Der Benutzername ist zu kurz!");
+
+            } if (username === "") { 
+                errors += ("Geben Sie einen Benutzernamen an!");
+            }
+
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (email === "" || !emailPattern.test(email)) {
+                errors += ("Geben Sie eine gültige EMail Adresse an!");
+            }
+
+            if (dropdown === "") {
+                errors += ("Wählen Sie etwas aus!");
+            }
+
+            if (!checkbox) {
+                errors += ("Nutzungsbedingungen nicht akzeptiert!");
+            }
+
+            if (errors.length > 0) {
+                alert(errors.join("\n"));
+            } else {
+                alert(`Sie (${username}) haben sich für ${dropdown} angemeldet. Vielen Dank!`);
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="countDisplay">Anzahl der Buttons: 1</h1>
+
+    <div id="buttonContainer">
+        <button onclick="verdoppeln()">Verdoppeln</button>
+    </div>
+
+    <br>
+
+
+    <input type="number" id="deleteCount" placeholder="Anzahl löschen" min="1">
+    <button onclick="loeschen()">Löschen</button>
+
+    <script>
+
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "cyan", "lime", "brown"];
+
+        function verdoppeln() {
+            let container = document.getElementById("buttonContainer");
+            let countDisplay = document.getElementById("countDisplay");
+
+            let buttons = container.getElementsByTagName("button").length;
+            let newButtons = [];
+
+            for (let i = 0; i < buttons; i++) {
+                let newButton = document.createElement("button");
+                newButton.textContent = "Verdoppeln";
+                newButton.onclick = verdoppeln;
+
+                // Zufällige Farbe aus dem Array wählen
+                let randomColor = colors[Math.floor(Math.random() * colors.length)];
+                newButton.style.backgroundColor = randomColor;
+
+                newButtons.push(newButton);
+            }
+
+            newButtons.forEach(button => container.appendChild(button));
+
+            countDisplay.textContent = "Anzahl der Buttons: " + container.getElementsByTagName("button").length;
+        }
+
+        function loeschen() {
+            let container = document.getElementById("buttonContainer");
+            let countDisplay = document.getElementById("countDisplay");
+            let deleteCount = parseInt(document.getElementById("deleteCount").value) || 0;
+
+            let buttons = container.getElementsByTagName("button");
+
+            // Sicherstellen, dass wir nicht mehr löschen als vorhanden sind
+            let toDelete = Math.min(deleteCount, buttons.length - 1); // Mindestens 1 Button bleibt erhalten
+
+            for (let i = 0; i < toDelete; i++) {
+                container.removeChild(buttons[buttons.length - 1]); // Entferne die zuletzt hinzugefügten Buttons
+            }
+
+            countDisplay.textContent = "Anzahl der Buttons: " + container.getElementsByTagName("button").length;
+        }
+    </script>
+</body>
+
+
+</html>

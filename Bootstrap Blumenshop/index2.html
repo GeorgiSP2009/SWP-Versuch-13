@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script>
+        function updatePrice() {
+            let priceOutput = document.getElementById("priceOutPut");
+            let productSelect = document.getElementById("product");
+
+            document.getElementById("priceOutPut").innerHTML = productSelect.value + "EUR"
+        }
+
+        function addToCart() {
+            const productSelect = document.getElementById("product");
+            const selectedProduct = productSelect.options[productSelect.selectedIndex].text;
+            const selectedPrice = parseFloat(productSelect.value);
+
+            const cartTable = document.getElementById("cartItems");
+            const row = cartTable.insertRow();
+            row.innerHTML = `<td>${selectedProduct}</td><td>${selectedPrice.toFixed(2)} €</td>`;
+
+            const totalSumElement = document.getElementById("totalSum");
+            const currentSum = parseFloat(totalSumElement.textContent) || 0;
+            totalSumElement.textContent = (currentSum + selectedPrice).toFixed(2) + " €";
+        }
+
+        function placeOrder() {
+            alert("Ihre Produkte wurden bestellt. Vielen Dank!");
+            document.getElementById("cartItems").innerHTML = "";
+            document.getElementById("totalSum").textContent = "0.00 €";
+        }
+    </script>
+
+</head>
+
+<body class="p-3 m-0 border-0 bd-example m-0 border-0 bd-example-row">
+    
+
+    <form action="javascript:void(0);">
+
+        <div class="container-fluid">
+            <h3>Blumengeschäft</h3>
+            <div class="row">
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8"><label for="name">Name: </label>
+                            <input type="text" id="name" name="name" placeholder="Name"><br>
+                        </div>
+                        <div class="col-sm-4"><label for="email">E-Mail: </label>
+                            <input type="email" id="email" name="email" placeholder="MUS4567@spengergasse.at"><br>
+                        </div>
+                    </div>
+                    <div class="row">
+
+
+                        <div class="col-sm"><label for="product">Produkt: </label>
+                            <select name="product" id="product" onchange="updatePrice()">
+                                <option value="1.00">Sonnenblume</option>
+                                <option value="1.50">Tulpe</option>
+                                <option value="2.00">Lilie</option>
+                                <option value="2.50">Rose</option>
+                                <option value="3.00">Edelweiß</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-sm"><label>Preis: <span id="priceOutPut">1.00 €</span></label>
+                            <button type="button" onclick="addToCart()">Hinzufügen</button><br>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                            <textarea name="Anmerkung" id="Anmerkung"
+                                placeholder="Hallo, ich habe noch folgende Anmerkung:"></textarea>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h3>Warenkorb</h3>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 5px;">Produkt</th>
+                            <th style="border: 1px solid black; padding: 5px;">Preis</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartItems">
+                    </tbody>
+                </table>
+                <p>Gesamtsumme: <span id="totalSum">0.00 €</span></p>
+                <p><button type="button" onclick="placeOrder()">Bestellen</button></p>
+            </div>
+        </div>
+        </div>
+
+    </form>
+
+    <!--<h3>Warenkorb</h3>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; padding: 5px;">Produkt</th>
+                <th style="border: 1px solid black; padding: 5px;">Preis</th>
+            </tr>
+        </thead>
+        <tbody id="cartItems">
+        </tbody>
+    </table>
+    <p>Gesamtsumme: <span id="totalSum">0.00 €</span></p>
+    -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

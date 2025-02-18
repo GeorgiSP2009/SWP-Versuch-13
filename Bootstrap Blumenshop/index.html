@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blumengeschäft</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function updatePrice() {
+            let priceOutput = document.getElementById("priceOutPut");
+            let productSelect = document.getElementById("product");
+
+            document.getElementById("priceOutPut").innerHTML = productSelect.value + "EUR"
+        }
+
+        function addToCart() {
+            const productSelect = document.getElementById("product");
+            const selectedProduct = productSelect.options[productSelect.selectedIndex].text;
+            const selectedPrice = parseFloat(productSelect.value);
+
+            const cartTable = document.getElementById("cartItems");
+            const row = cartTable.insertRow();
+            row.innerHTML = `<td>${selectedProduct}</td><td>${selectedPrice.toFixed(2)} €</td>`;
+
+            const totalSumElement = document.getElementById("totalSum");
+            const currentSum = parseFloat(totalSumElement.textContent) || 0;
+            totalSumElement.textContent = (currentSum + selectedPrice).toFixed(2) + " €";
+        }
+
+        function placeOrder() {
+            alert("Ihre Produkte wurden bestellt. Vielen Dank!");
+            document.getElementById("cartItems").innerHTML = "";
+            document.getElementById("totalSum").textContent = "0.00 €";
+        }
+    </script>
+</head>
+<body>
+    <h3>Blumengeschäft</h3>
+    
+    <form action="javascript:void(0);">
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" placeholder="Max Mustermann"><br>
+
+        <label for="email">E-Mail: </label>
+        <input type="email" id="email" name="email" placeholder="MUS4567@spengergasse.at"><br>
+
+        <label for="product">Produkt: </label>
+        <select name="product" id="product" onchange="updatePrice()">
+            <option value="1.00">Sonnenblume</option>
+            <option value="1.50">Tulpe</option>
+            <option value="2.00">Lilie</option>
+            <option value="2.50">Rose</option>
+            <option value="3.00">Edelweiß</option>
+        </select>
+        <label>Preis: <span id="priceOutPut">1.00 €</span></label>
+        <button type="button" onclick="addToCart()">Hinzufügen</button><br>
+
+        <textarea name="Anmerkung" id="Anmerkung" placeholder="Hallo, ich habe noch folgende Anmerkung:"></textarea>
+    
+        <p><button type="button" onclick="placeOrder()">Bestellen</button></p>
+    </form>
+
+    <h3>Warenkorb</h3>
+    
+    <table style="border-collapse: collapse; width: 50px;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; padding: 5px;">Produkt</th>
+                <th style="border: 1px solid black; padding: 5px;">Preis</th>
+            </tr>
+        </thead>
+        <tbody id="cartItems">
+        </tbody>
+    </table>
+
+    <p>Gesamtsumme: <span id="totalSum">0.00 €</span></p>
+</body>
+</html>

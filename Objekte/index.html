@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<p class="ausgabe"></p>
+<script>
+
+const Krokodil = {
+    name: "Luna",
+    art: "echte Krokodile",
+    farbe: "grün",
+    gewicht: "65 kg",
+    alter: "3 Jahre",
+    zustand: "stillstand",
+    bewegung: function(){
+    this.zustand = "in Bewegung"},
+    atacke: function(){
+        this.zustand = "atackiert"
+    }
+};
+
+const Krokodil2 = {
+    name: "Lilu",
+    art: "Alligatoren",
+    farbe: "grün/braun",
+    gewicht: "80 kg",
+    alter: "4 Jahre",
+    zustand: "stillstand",
+    bewegung: function(){
+    this.zustand = "in Bewegung"},
+    atacke: function(){
+        this.zustand = "atackiert"
+    }
+};
+
+const Krokodil3 = {
+    name: "Bernd",
+    art: "Gaviale",
+    farbe: "grün/braun",
+    gewicht: "45 kg",
+    alter: "2 Jahre",
+    zustand: "stillstand",
+    bewegung: function(){
+    this.zustand = "in Bewegung"},
+    atacke: function(){
+        this.zustand = "atackiert"
+    }
+};
+
+const krokodile = [];
+
+function getRandomValue(type) {
+  switch (type) {
+    case 'name':
+      return `Krokodil ${Math.floor(Math.random() * 100)}`;
+    case 'art':
+      const arts = ['echte Krokodile', 'Alligatoren', 'Gaviale'];
+      return arts[Math.floor(Math.random() * arts.length)];
+    case 'farbe':
+      const farben = ['grün', 'grün/braun', 'braun'];
+      return farben[Math.floor(Math.random() * farben.length)];
+    case 'gewicht':
+      return `${Math.floor(Math.random() * 100)} kg`;
+    case 'alter':
+      return `${Math.floor(Math.random() * 10)} Jahre`;
+    default:
+      return '';
+  }
+}
+
+for (let i = 0; i < 30; i++) {
+  const krokodil = {
+    name: getRandomValue('name'),
+    art: getRandomValue('art'),
+    farbe: getRandomValue('farbe'),
+    gewicht: getRandomValue('gewicht'),
+    alter: getRandomValue('alter'),
+    zustand: 'stillstand',
+    bewegung: function() {
+      this.zustand = 'in Bewegung';
+    },
+    atacke: function() {
+      this.zustand = 'atackiert';
+    }
+  };
+  krokodile.push(krokodil);
+}
+
+// Ausgabe der erzeugten Objekte
+console.log(krokodile);
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 03.12.2024</title>
+    <script>
+        function validateForm() {
+            const benutzername = document.getElementById("benutzername").value;
+            const email = document.getElementById("email").value;
+            const dropdown = document.getElementById("dropdown").value;
+            const bedingungenAkzeptiert = document.getElementById("bedingungen").checked;
+
+            let errorMessage = "";
+
+            if (!benutzername){
+                errorMessage += "Benutzername leer.\n";
+            }
+            if( benutzername.length <5){
+                errorMessage += "Benutzername zu kurz.\n";
+            }
+
+            const erlaubteZeichen = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!email || !erlaubteZeichen.test(email)) {
+                errorMessage += "Ungültige E-Mail-Adresse.\n";
+            }
+
+            if (dropdown === "") {
+                errorMessage += "Keine Auswahl getroffen.\n";
+            }
+
+            if (!bedingungenAkzeptiert) {
+                errorMessage += "Nutzungsbedingungen nicht akzeptiert.\n";
+            }
+
+            if (errorMessage) {
+                alert(errorMessage);
+            } else {
+                alert(`Sie (${benutzername}) haben sich für ${dropdown} angemeldet. Vielen Dank!`);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Anmeldung</h1>
+    <form onsubmit="event.preventDefault(); validateForm();">
+        <label for="benutzername">Benutzername:</label><br>
+        <input type="text" id="benutzername" placeholder="Max Mustermann"><br><br>
+
+        <label for="email">E-Mail:</label><br>
+        <input type="text" id="email" placeholder="beispiel@domain.com"><br><br>
+
+        <label for="dropdown">Dropdown Auswahl:</label><br>
+        <select id="dropdown">
+            <option value="">-- Bitte wählen --</option>
+            <option value="Frühstück">Frühstück</option>
+            <option value="Mittagessen">Mittagessen</option>
+            <option value="Abendessen">Abendessen</option>
+            <option value="Snack">Snack</option>
+        </select><br><br>
+
+        <label>
+            <input type="checkbox" id="bedingungen">
+            Ich akzeptiere die Nutzungsbedingungen
+        </label><br><br>
+
+        <button type="submit">Absenden</button>
+    </form>
+</body>
+</html>

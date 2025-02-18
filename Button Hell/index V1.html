@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="anzahl">Anzahl der Buttons: 1</h1>
+
+    <input type="text" id="deleteField">
+    <button id="delete">Delete</button>
+
+    <div id="buttonContainer">
+        <button onclick="verdoppeln()">Verdoppeln</button>
+    </div>
+
+    <script>
+        const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "cyan", "lime", "brown"];
+
+        function verdoppeln() {
+            let container = document.getElementById("buttonContainer");
+            let anzahl = document.getElementById("anzahl");
+
+            let buttons = container.getElementsByTagName("button").length;
+            let newButtons = [];
+
+            for (let i = 0; i < buttons; i++) {
+                let newButton = document.createElement("button");
+                newButton.textContent = "Verdoppeln";
+                newButton.onclick = verdoppeln;
+
+                let randomColor = colors[Math.floor(Math.random() * colors.length)];
+                newButton.style.backgroundColor = randomColor;
+
+                newButtons.push(newButton);
+            }
+
+            newButtons.forEach(button => container.appendChild(button));
+
+            anzahl.textContent = "Anzahl der Buttons: " + container.getElementsByTagName("button").length;
+        }
+
+        function deleteButtons(){
+
+        }
+    </script>
+</body>
+
+</html>
